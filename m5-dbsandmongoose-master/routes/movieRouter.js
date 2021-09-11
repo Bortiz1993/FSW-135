@@ -1,25 +1,32 @@
 const express = require('express')
 const movieRouter = express.Router()
-const uuid = require('uuid/v4')
+const Movie = require('../models/movie.js')
 
-const movies = [
-  { title: "die hard", genre: "action", _id: uuid() },
-  { title: "star wars IV", genre: "fantasy", _id: uuid() },
-  { title: "lion king", genre: "fantasy", _id: uuid() },
-  { title: "friday the 13th", genre: "horror", _id: uuid() },
-]
 
 // Get All
 movieRouter.get("/", (req, res, next) => {
+Movie.find((err, movies) => {
+  if(err){
+    res.status(500)
+    return next(err)
+  }
   return res.status(200).send(movies)
 })
+
+});
 
 
 // Post One
 movieRouter.post("/", (req, res, next) => {
-  const newMovie = req.body
-  newMovie._id = uuid()
-  movies.push(newMovie)
+  const newMovie = new Movie(req.body)
+  newMovie.save((err, savedMovie) => {
+    if(err){
+      req.status(500)
+      return next(err)
+    }
+    return res.status(201).send(savedMovie)
+  })
+  
   return res.status(201).send(newMovie)
 })
 

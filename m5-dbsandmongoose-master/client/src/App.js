@@ -59,9 +59,9 @@ export default function App() {
 
         {/* 
           Uncomment the below section for lesson 2.5 - Using params and queries in mongoose  
-        */}
+        }
 
-        {/* <h4>Filter by Genre</h4>
+        { <h4>Filter by Genre</h4>
         <select onChange={handleFilter} className="filter-form">
           <option value="reset">All Movies</option>
           <option value="action">Action</option>
