@@ -1,1 +1,0 @@
-# FSW-135 This is my MongoDB server.

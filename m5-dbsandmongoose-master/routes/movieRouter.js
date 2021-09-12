@@ -21,7 +21,7 @@ movieRouter.post("/", (req, res, next) => {
   const newMovie = new Movie(req.body)
   newMovie.save((err, savedMovie) => {
     if(err){
-      req.status(500)
+      res.status(500)
       return next(err)
     }
     return res.status(201).send(savedMovie)
@@ -59,20 +59,33 @@ movieRouter.get("/search/genre", (req, res, next) => {
 
 // Delete One
 movieRouter.delete("/:movieId", (req, res, next) => {
-  const movieId = req.params.movieId
-  const movieIndex = movies.findIndex(movie => movie._id === movieId)
-  movies.splice(movieIndex, 1)
-  return res.send("SUccessfully deleted movie!")
+  Movie.findOneAndDelete(
+    {_id: req.params.movieId}, 
+    (err, deletedItem) => {
+      if(err){
+        res.status(500)
+        return next(err)
+      }
+      return res.status(200).send(`Successfully deleted item ${deletedItem.title} from the database`)
+    }
+  )
 })
 
 
 // Update One
 movieRouter.put("/:movieId", (req, res, next) => {
-  const movieId = req.params.movieId
-  const updateObject = req.body
-  const movieIndex = movies.findIndex(movie => movie._id === movieId)
-  const updatedMovie = Object.assign(movies[movieIndex], updateObject)
-  return res.status(201).send(updatedMovie)
+  Movie.findOneAndUpdate(
+    { _id: req.params.movieID},
+    req.body,
+    {new: true},
+    (err, updatedMovie) => {
+      if(err){
+        res.status(500)
+        return next(err)
+      }
+      return res.status(201).send(updatedMovie)
+    }
+  )  
 })
 
 
