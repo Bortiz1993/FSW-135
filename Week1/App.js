@@ -24,18 +24,18 @@ mongoose.connect('mongodb://localhost:27017/moviesdb',
 app.use("/movies", require("./Routes/movieRouter"))
 
 //error handler
-// app.use((err, req, res, next) => {
-//     console.log(err)
-//     return res.send({errMsg: use.message})
-// })
-
 app.use((err, req, res, next) => {
-  console.log(err);
-  if (err.name === "UnauthorizedError") {
-    res.status(err.status);
-  }
-  return res.send({ errMsg: err.message });
-});
+    console.log(err)
+    return res.send({errMsg: err.message})
+})
+
+// app.use((err, req, res, next) => {
+//   console.log(err);
+//   if (err.name === "UnauthorizedError") {
+//     res.status(err.status);
+//   }
+//   return res.send({ errMsg: err.message });
+// });
 
 
 

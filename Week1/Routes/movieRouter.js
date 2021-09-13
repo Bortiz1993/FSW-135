@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const movie = require('./../Models/movie');
 const movieRouter = express.Router()
 const Movie = require("./../Models/movie")
 
@@ -78,7 +79,7 @@ movieRouter.delete("/:movieId", (req, res, next) => {
 // Update One
 movieRouter.put("/:movieId", (req, res, next) => {
   Movie.findOneAndUpdate(
-    { _id: req.params.movieID},
+    { _id: req.params.movieId},
     req.body,
     {new: true},
     (err, updatedMovie) => {
