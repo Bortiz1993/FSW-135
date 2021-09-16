@@ -1,23 +1,23 @@
 const express = require('express');
-const movie = require('./../Models/movie');
+// const movie = require('./../Models/movie');
 const movieRouter = express.Router()
 const Movie = require("./../Models/movie")
 
 
 // Get All
 movieRouter.get("/", (req, res, next) => {
-  // console.log(Movie)
-Movie.find((err, movies) => {
-  console.log(movies)
-  if(err){
-    console.log(err)
-    res.status(500)
-    return next(err)
-  } else
-  {return res.status(200).send(movies)}
-})
+ console.log(Movie)
+  Movie.find((err, movies) => {
 
-});
+    console.log(movies)
+    if(err){
+      console.log(err)
+      res.status(500)
+      return next(err)
+    } else
+    {return res.status(200).send(movies)}
+  })
+ });
 
 
 // Post One
@@ -37,14 +37,27 @@ movieRouter.post("/", (req, res, next) => {
 
 // Get One
 movieRouter.get("/:movieId", (req, res, next) => {
-  const movieId = req.params.movieId
-  const foundMovie = movies.find(movie => movie._id === movieId)
+  console.log("inside get by id");
+ 
+  const movieId = req.params.movieId;
+  
+  var foundMovie;
+    Movie.findOne({_id: movieId}, function(err, foundMovie) {
+    if (err) {
+      console.log(err);
+    } else {
+      // Do Something 
+    }
+  });
+
+  console.log(movieId)
   if(!foundMovie){
     const error = new Error(`The item with id ${movieId} was not found.`)
     res.status(500)
     return next(error)
   }
-  return res.status(200).send(foundMovie)
+  console.log(foundMovie[0].title);
+  return res.status(200).send(foundMovie.title);
 })
 
 

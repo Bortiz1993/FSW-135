@@ -19,6 +19,13 @@ mongoose.connect('mongodb://localhost:27017/moviesdb',
   () => console.log("Connected to the DB")
 )
 
+// New connect to Database
+// main().catch(err => console.log(err));
+
+// async function main() {
+//   await mongoose.connect('mongodb://localhost:27017/moviesdb');
+//   console.log("Connected to the DB")
+// }
 
 //routes
 app.use("/movies", require("./Routes/movieRouter"))
