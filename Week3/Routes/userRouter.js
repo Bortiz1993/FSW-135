@@ -73,6 +73,22 @@ userRouter.get("/search/username", (req, res, next) => {
 )})
 
 
+// userRouter.get('/search', (req, res, next) => {
+//     const { user} = req.query
+//     const pattern = new RegExp(user)
+//     User.find (
+//       { username: { $regex: pattern, $options: 'i' } }, 
+//       (err, users) => {
+//         if(err) {
+//             res.status(500)
+//             return next(err)
+//         }
+//         return res.status(201).send(users)
+//       }
+//     )
+//   })
+
+
 // Delete One
 userRouter.delete("/:userId", (req, res, next) => {
   User.findOneAndDelete(
