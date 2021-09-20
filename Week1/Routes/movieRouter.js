@@ -41,24 +41,23 @@ movieRouter.get("/:movieId", (req, res, next) => {
  
   const movieId = req.params.movieId;
   
-  var foundMovie;
+
     Movie.findOne({_id: movieId}, function(err, foundMovie) {
     if (err) {
       console.log(err);
-    } else {
-      // Do Something 
-    }
-  });
+      res.status(500)
+      return next(err)
+    } 
 
   console.log(movieId)
   if(!foundMovie){
     const error = new Error(`The item with id ${movieId} was not found.`)
-    res.status(500)
+    res.status(404)
     return next(error)
   }
-  console.log(foundMovie[0].title);
-  return res.status(200).send(foundMovie.title);
-})
+  console.log(foundMovie);
+  return res.status(200).send(foundMovie);
+}) });
 
 
 // Get by genre
