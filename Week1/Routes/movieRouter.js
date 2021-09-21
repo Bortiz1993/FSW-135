@@ -1,5 +1,4 @@
 const express = require('express');
-// const movie = require('./../Models/movie');
 const movieRouter = express.Router()
 const Movie = require("./../Models/movie")
 
@@ -63,14 +62,15 @@ movieRouter.get("/:movieId", (req, res, next) => {
 // Get by genre
 movieRouter.get("/search/genre", (req, res, next) => {
   const genre = req.query.genre
-  if(!genre){
-    const error = new Error("You must provide a genre")
-    res.status(500)
-    return next(error)
+  Movie.find({genre:genre}, (err, movie) => {
+    if(!movie){
+      const error = new Error("You must provide a genre")
+      res.status(500)
+      return next(error)
+    }
+   return res.status(200).send(movie)
   }
-  const filteredMovies = movies.filter(movie => movie.genre === genre)
-  return res.status(200).send(filteredMovies)
-})
+)})
 
 
 // Delete One
