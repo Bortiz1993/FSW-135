@@ -35,7 +35,7 @@ userRouter.post("/", (req, res, next) => {
 
 
 // Get One
-userRouter.get("/:userId", (req, res, next) => {
+userRouter.get("byId/:userId", (req, res, next) => {
   console.log("inside get by id");
  
   const userId = req.params.userId;
@@ -73,20 +73,23 @@ userRouter.get("/search/username", (req, res, next) => {
 )})
 
 
-// userRouter.get('/search', (req, res, next) => {
-//     const { user} = req.query
-//     const pattern = new RegExp(user)
-//     User.find (
-//       { username: { $regex: pattern, $options: 'i' } }, 
-//       (err, users) => {
-//         if(err) {
-//             res.status(500)
-//             return next(err)
-//         }
-//         return res.status(201).send(users)
-//       }
-//     )
-//   })
+userRouter.get('/search', (req, res, next) => {
+    const { user} = req.query
+    console.log(user)
+
+    const pattern = new RegExp(user)
+    console.log(pattern)
+    User.find (
+      { username: { $regex: pattern, $options: 'i' } }, 
+      (err, users) => {
+        if(err) {
+            res.status(500)
+            return next(err)
+        }
+        return res.status(201).send(users)
+      }
+    )
+  })
 
 
 // Delete One

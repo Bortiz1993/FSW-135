@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+require('dotenv').config();
+const expressJwt = require('express-jwt');
 
 
 //Middleware for every request;
@@ -17,11 +19,17 @@ async function main() {
 }
 
 //routes
-app.use("/user", require("./Routes/userRouter"))
+app.use('/api', expressJwt({secret: process.env.SECRET, algorithms:['HS256']}))
+app.use("/api/user", require("./Routes/userRouter"))
 app.use("/auth", require("./Routes/authRouter"))
+app.use("/api/issue", require("./Routes/issueRouter"))
+// app.use("/api/comment",require("./Routes/commentRouter"))
 
 //error handler
 app.use((err, req, res, next) => {
+  if(err.name === 'Unauthorized error'){
+    res.status(err.status)
+  }
     console.log(err)
     return res.send({errMsg: err.message})
 })

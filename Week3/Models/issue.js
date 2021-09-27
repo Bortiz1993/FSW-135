@@ -15,12 +15,30 @@ const issueSchema = new Schema({
   },
   imgUrl: {
     type: String,
-    required: true
+    required: false
   },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
     required: true
+  },
+
+ voters:{
+    type:Array,
+    default: []
+  },
+
+  // comments model?
+  downvote: {
+    type: Number,
+    default: 0
+    
+  },
+
+  upvote:{
+    type: Number,
+    default: 0
+
   }
 })
 

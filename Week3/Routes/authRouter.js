@@ -24,21 +24,25 @@ authRouter.post("/signup", (req, res, next) => {
       const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
       return res.status(201).send({ token, user: savedUser })
     })
+  
   })
 })
 
 // Login
 authRouter.post("/login", (req, res, next) => {
-  User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+  console.log(req.body)
+  User.findOne({ username: req.body.username }, (err, user) => {
+    console.log(user)
     if(err){
       res.status(500)
       return next(err)
     }
     if(!user){
       res.status(403)
-      return next(new Error("Username or Password are incorrect"))
+      return next(new Error("Username cannot be found"))
     }
     if(req.body.password !== user.password){
+      console.log(req.body.password)
       res.status(403)
       return next(new Error("Username or Password are incorrect"))
     }
