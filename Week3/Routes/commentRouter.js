@@ -1,6 +1,6 @@
 const express = require('express');
 const commentRouter = express.Router()
-const Comment = require("./../Models/user")
+const Comment = require("./../Models/comment")
 
 
 // Get All
@@ -20,7 +20,8 @@ commentRouter.get("/", (req, res, next) => {
 
 
 // Post One
-commentRouter.post("/", (req, res, next) => {
+commentRouter.post("/:issueId", (req, res, next) => {
+  req.body.userId = req.user._id
      req.body.username = req.user.username
   req.body.issueId = req.params.issueId
   const newComment = new Comment(req.body)
@@ -36,19 +37,16 @@ commentRouter.post("/", (req, res, next) => {
 
 
 // Get One
-commentRouter.get("byId/:commentId", (req, res, next) => {
+commentRouter.get("/byId/:commentId", (req, res, next) => {
   console.log("inside get by id");
- 
   const commentId = req.params.commentId;
-  
     Comment.findOne({_id: commentId}, function(err, foundComment) {
     if (err) {
       console.log(err);
       res.status(500)
       return next(err)
     } 
-
-  console.log(userId)
+  console.log(commentId)
   if(!foundComment){
     const error = new Error(`The item with id ${commentId} was not found.`)
     res.status(404)
@@ -94,32 +92,32 @@ commentRouter.get('/search', (req, res, next) => {
 
 
 // Delete One
-commentRouter.delete("/:userId", (req, res, next) => {
+commentRouter.delete("/:commentId", (req, res, next) => {
   Comment.findOneAndDelete(
-    {_id: req.params.userId}, 
+    {_id: req.params.commentId}, 
     (err, deletedItem) => {
       if(err){
         res.status(500)
         return next(err)
       }
-      return res.status(200).send(`Successfully deleted item ${deletedItem.username} from the database`)
+      return res.status(200).send(`Successfully deleted item ${deletedItem.body} from the database`)
     }
   )
 })
 
 
 // Update One
-commentRouter.put("/:userId", (req, res, next) => {
+commentRouter.put("/:commentId", (req, res, next) => {
   Comment.findOneAndUpdate(
-    { _id: req.params.userId},
+    { _id: req.params.commentId},
     req.body,
     {new: true},
-    (err, updatedUser) => {
+    (err, updatedComment) => {
       if(err){
         res.status(500)
         return next(err)
       }
-      return res.status(201).send(updatedUser)
+      return res.status(201).send(updatedComment)
     }
   )  
 })

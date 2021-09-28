@@ -35,9 +35,11 @@ issueRouter.post("/", (req, res, next) => {
   
 })
 
+//make a get All by userId similar to the issueID
+
 
 // Get One
-issueRouter.get("byId/:issueId", (req, res, next) => {
+issueRouter.get("/byId/:issueId", (req, res, next) => {
   console.log("inside get by id");
  
   const issueId = req.params.issueId;
@@ -65,7 +67,7 @@ issueRouter.get("/search/title", (req, res, next) => {
   const title = req.query.title
   Issue.find({ title: title}, (err, issue) => {
     if(!issue){
-        const error = new Error("You must provide a user name")
+        const error = new Error("You must provide a title")
         res.status(500)
         return next(error)
       }
@@ -78,7 +80,6 @@ issueRouter.get("/search/title", (req, res, next) => {
 issueRouter.get('/search', (req, res, next) => {
     const { issue} = req.query
     console.log(issue)
-
     const pattern = new RegExp(issue)
     console.log(pattern)
     Issue.find (
@@ -110,19 +111,19 @@ issueRouter.delete("/:issueId", (req, res, next) => {
 
 
 // Update One
-issueRouter.put("/:issueId", (req, res, next) => {
-  Issue.findOneAndUpdate(
-    { _id: req.params.issueId},
-    req.body,
-    {new: true},
-    (err, updatedIssue) => {
-      if(err){ res.status(500)
-        return next(err)
-      }
-      return res.status(201).send(updatedIssue)
-    }
-  )  
-})
+// issueRouter.put("/:issueId", (req, res, next) => {
+//   Issue.findOneAndUpdate(
+//     { _id: req.params.issueId},
+//     req.body,
+//     {new: true},
+//     (err, updatedIssue) => {
+//       if(err){ res.status(500)
+//         return next(err)
+//       }
+//       return res.status(201).send(updatedIssue)
+//     }
+//   )  
+// })
 
 issueRouter.put("/:issueId/upvote", (req, res, next) => {
     Issue.findOneAndUpdate(

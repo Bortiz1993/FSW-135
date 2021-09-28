@@ -21,6 +21,7 @@ export default function UserProvider(props){
   const [userState, setUserState] = useState(initState)
 
   function signup(credentials){
+    console.log(credentials)
     axios.post("/auth/signup", credentials)
       .then(res => {
         const { user, token } = res.data

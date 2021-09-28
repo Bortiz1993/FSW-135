@@ -23,7 +23,7 @@ app.use('/api', expressJwt({secret: process.env.SECRET, algorithms:['HS256']}))
 app.use("/api/user", require("./Routes/userRouter"))
 app.use("/auth", require("./Routes/authRouter"))
 app.use("/api/issue", require("./Routes/issueRouter"))
-// app.use("/api/comment",require("./Routes/commentRouter"))
+ app.use("/api/comment",require("./Routes/commentRouter"))
 
 //error handler
 app.use((err, req, res, next) => {
