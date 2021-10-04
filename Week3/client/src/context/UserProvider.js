@@ -63,8 +63,10 @@ export default function UserProvider(props){
   }
 
   function getUserTodos(){
-    userAxios.get("/api/todo/user")
+    userAxios.get("/api/issue/search/user")
+
       .then(res => {
+        console.log(res.data)
         setUserState(prevState => ({
           ...prevState,
           todos: res.data
@@ -74,7 +76,7 @@ export default function UserProvider(props){
   }
 
   function addTodo(newTodo){
-    userAxios.post("/api/todo", newTodo)
+    userAxios.post("/api/issue", newTodo)
       .then(res => {
         setUserState(prevState => ({
           ...prevState,

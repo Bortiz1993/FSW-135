@@ -62,10 +62,10 @@ issueRouter.get("/byId/:issueId", (req, res, next) => {
 }) });
 
 
-// Get by title
-issueRouter.get("/search/title", (req, res, next) => {
-  const title = req.query.title
-  Issue.find({ title: title}, (err, issue) => {
+// Get by user
+issueRouter.get("/search/user", (req, res, next) => {
+  const user = req.user._id
+  Issue.find({ user: user}, (err, issue) => {
     if(!issue){
         const error = new Error("You must provide a title")
         res.status(500)
@@ -75,6 +75,8 @@ issueRouter.get("/search/title", (req, res, next) => {
   }
  
 )})
+
+
 
 
 issueRouter.get('/search', (req, res, next) => {
