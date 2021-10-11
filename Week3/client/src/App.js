@@ -5,6 +5,7 @@ import Auth from './components/Auth.js'
 import Profile from './components/Profile.js'
 import Public from './components/Public.js'
 import { UserContext } from './context/UserProvider.js'
+import ProtectedRoute from './components/ProtectedRoute.js'
 
 export default function App(){
   const { token, logout } = useContext(UserContext)
@@ -16,13 +17,17 @@ export default function App(){
           exact path="/" 
           render={()=> token ? <Redirect to="/profile"/> : <Auth />}
         />
-        <Route 
+        <ProtectedRoute 
           path="/profile"
-          render={() => <Profile />}
+          component={Profile}
+          redirectTo='/'
+          token={token}
         />
-        <Route 
+        <ProtectedRoute 
           path="/public"
-          render={() => <Public />}
+          component={Public}
+          redirectTo='/'
+          token={token}
         />
       </Switch>
     </div>
