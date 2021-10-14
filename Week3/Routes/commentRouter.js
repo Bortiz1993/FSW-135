@@ -10,7 +10,7 @@ commentRouter.get("/", (req, res, next) => {
     console.log(Comment)
     //if the user is not authenticated, dont return the comment!
     if(!req.user.username){
-      return res.status(401).send("User name is not authenticated!")
+      return res.status(401)
     }
     if(err){
       console.log(err)

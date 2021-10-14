@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+// import {useCookies} from 'react-cookie'
 
 export const UserContext = React.createContext()
 
 const userAxios = axios.create()
 
 userAxios.interceptors.request.use(config => {
-  const token = localStorage.getItem("token")
+   const token = localStorage.getItem("token")
+  // console.log(cookies.get({
+  //   name: "token"
+  // }))
   config.headers.Authorization = `Bearer ${token}`
   return config
 })
@@ -20,6 +24,8 @@ export default function UserProvider(props){
   }
 
   const [userState, setUserState] = useState(initState)
+
+  // const [cookies, setCookie] = useCookies(['user']);
 
   function handleAuthError(errMsg) {
     setUserState(prevState => ({

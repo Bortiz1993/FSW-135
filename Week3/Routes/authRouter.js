@@ -26,6 +26,8 @@ authRouter.post("/signup", (req, res, next) => {
       }
                             // payload,            // secret
       const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET)
+      res.cookie('token',token,{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true, secure:true, sameSite:true });
+      res.cookie('user',savedUser.withoutPassword(),{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true, secure:true, sameSite:true });
       return res.status(201).send({ token, user: savedUser.withoutPassword() })
     })
   
@@ -57,17 +59,9 @@ authRouter.post("/login", (req, res, next) => {
      }
   
     const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
-     //SET a cookie?
-    app.get('/setCookie', (req, res) =>{
-      res.cookie('Chip', 'eValue');
-      res.send('Cookie has been saved successfully')
-    })
-    //cookie value?
-    app.get('/getCookie', (req, res) => {
-      console.log(req.cookies)
-      res.send(req.cookies);
-    })
     
+    res.cookie('token',token,{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true });  // maxAge: 2 hours
+  
     return res.status(200).send({ token, user: user.withoutPassword() })
   })
   })
