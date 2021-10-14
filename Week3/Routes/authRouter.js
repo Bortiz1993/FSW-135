@@ -2,6 +2,10 @@ const express = require('express')
 const authRouter = express.Router()
 const User = require('../Models/user.js')
 const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
+const bcrypt = require('bcrypt')
+
+
 
 // Signup
 authRouter.post("/signup", (req, res, next) => {
@@ -53,6 +57,17 @@ authRouter.post("/login", (req, res, next) => {
      }
   
     const token = jwt.sign(user.withoutPassword(), process.env.SECRET)
+     //SET a cookie?
+    app.get('/setCookie', (req, res) =>{
+      res.cookie('Chip', 'eValue');
+      res.send('Cookie has been saved successfully')
+    })
+    //cookie value?
+    app.get('/getCookie', (req, res) => {
+      console.log(req.cookies)
+      res.send(req.cookies);
+    })
+    
     return res.status(200).send({ token, user: user.withoutPassword() })
   })
   })

@@ -4,12 +4,19 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const expressJwt = require('express-jwt');
+const cookieParser = require('cookie-parser')
 
 
 //Middleware for every request;
+
 app.use(express.json());
+
 app.use(morgan("dev"));
 
+// app.use(express.cookieSession({
+//   key: 'app.sess',
+//   secret: process.env.SECRET
+// }));
 // New connect to Database
 main().catch(err => console.log(err));
 
@@ -20,6 +27,7 @@ async function main() {
 
 //routes
 app.use('/api', expressJwt({secret: process.env.SECRET, algorithms:['HS256']}))
+app.use(cookieParser(process.env.SECRET))
 app.use("/api/user", require("./Routes/userRouter"))
 app.use("/auth", require("./Routes/authRouter"))
 app.use("/api/issue", require("./Routes/issueRouter"))
