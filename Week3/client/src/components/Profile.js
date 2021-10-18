@@ -2,7 +2,7 @@
 import React, { useContext } from 'react'
 import TodoForm from './TodoForm.js'
 import TodoList from './TodoList.js'
-import Todo from './Todo.js'
+// import Todo from './Todo.js'
 import { UserContext } from '../context/UserProvider.js'
 
 export default function Profile(){
@@ -11,7 +11,9 @@ export default function Profile(){
       username 
     }, 
     addTodo, 
-    todos 
+    todos,
+    votingUp,
+    votingDown 
   } = useContext(UserContext)
 
   return (
@@ -20,7 +22,7 @@ export default function Profile(){
       <h3>Add A Todo</h3>
       <TodoForm addTodo={addTodo}/>
       <h3>Your Todos</h3>
-      <TodoList todos={todos}/>
+      <TodoList   votingUp={votingUp} votingDown={votingDown} todos={todos}/>
     </div>
   )
 }

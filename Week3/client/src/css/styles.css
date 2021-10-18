@@ -4,13 +4,22 @@
     margin: 0;
     padding: 0;
     font-size: 16px;
-    font-family: sans-serif;
+    font-family: Georgia;
     outline: none;
     text-decoration: none;
+    color: white;
+  }
+  
+  html{
+    background-image: url("../images/rock_the_vote.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    background-attachment: fixed;
   }
   
   .app {
-    background-color: #eee9;
+   
   }
   
   .navbar {
@@ -18,7 +27,7 @@
     justify-content: space-around;
     align-items: center;
     height: 40px;
-    background-color: #3339;
+    background-color:rgb(47, 79, 79);
   }
   
   .auth-container {
@@ -42,7 +51,7 @@
     border: 1px solid #3339;
     padding: 20px;
     border-radius: 5px;
-    background-color: #aaa9;
+    background-color:darkslategrey;
   
     display: flex;
     flex-direction: column;
@@ -52,12 +61,14 @@
     margin: 16px 8px;
     padding: 8px;
     border-radius: 4px;
+    color: black;
   }
   
   .auth-container > form > button {
     margin: 16px 8px;
     padding: 8px;
     border-radius: 4px;
+    background-color: blue;
   }
   
   .todo-list {
@@ -76,7 +87,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
   }
   
   .profile > h1 {
@@ -95,14 +105,27 @@
     flex-direction: column;
     margin: 16px 0;
     border: 1px solid #3339;
-    background-color: #aaa9;
+    background-color: darkslategray;
     padding: 16px;
     border-radius: 5px
   }
   
   .profile > form > input,
   .profile > form > button {
+    background-color: darkgreen;
     margin: 8px 0;
     padding: 8px;
     border-radius: 5px
+  }
+
+  .likeButton{
+background-color: blue;
+  }
+
+  .dislikeButton{
+    background-color: red;
+  }
+
+  .imgTodo{
+    border: 8px solid darkslategray;
   }

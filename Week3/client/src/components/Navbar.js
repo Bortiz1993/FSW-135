@@ -8,7 +8,7 @@ export default function Navbar(props){
     <div className="navbar">
       {token && <Link to="/profile">Profile</Link>}
       <Link to="/public">Public</Link>
-      {token && <button onClick={logout}>Logout</button>}
+      {token && <button onClick={logout} style={{backgroundColor: "red", color: "white", textAlign:"center" }}>Logout</button>}
     </div>
   )
 }

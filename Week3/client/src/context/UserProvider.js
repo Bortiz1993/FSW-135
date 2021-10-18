@@ -84,11 +84,12 @@ export default function UserProvider(props){
     })
   }
 
+  //get user todo or issues
+
   function getUserTodos(){
     userAxios.get("/api/issue/search/user")
-
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         setUserState(prevState => ({
           ...prevState,
           todos: res.data
@@ -108,6 +109,30 @@ export default function UserProvider(props){
       .catch(err => console.dir(err.response.data.errMsg))
   }
 
+  function votingUp(id){
+    userAxios.put(`/api/issue/${id}/upvote`)
+    .then(res => {
+      // setUserState(prevState => ({
+      //   ...prevState,
+      //   todos: [...prevState.todos, res.data]
+      // }))
+      getUserTodos()
+    })
+    .catch(err => console.dir(err.response.data.errMsg))
+  }
+
+  function votingDown(id){
+    userAxios.put(`/api/issue/${id}/downvote`)
+    .then(res => {
+      // setUserState(prevState => ({
+      //   ...prevState,
+      //   todos: [...prevState.todos, res.data]
+      // }))
+      getUserTodos()
+    })
+    .catch(err => console.dir(err.response.data.errMsg))
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -115,6 +140,8 @@ export default function UserProvider(props){
         signup,
         login,
         logout,
+        votingUp,
+        votingDown,
         addTodo,
         resetAuthError
       }}>
