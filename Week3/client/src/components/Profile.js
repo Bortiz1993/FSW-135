@@ -18,11 +18,16 @@ export default function Profile(){
 
   return (
     <div className="profile">
-      <h1>Welcome @{username}!</h1>
       <h3>Add A Todo</h3>
-      <TodoForm addTodo={addTodo}/>
-      <h3>Your Todos</h3>
+     <TodoForm addTodo={addTodo}/>
+   
+      <h1>Welcome @{username}!</h1> 
+     
+     
+     
+     
       <TodoList   votingUp={votingUp} votingDown={votingDown} todos={todos}/>
+      <h2>Your Todos</h2>
     </div>
   )
 }
