@@ -1,17 +1,19 @@
-//  import CommentList from './CommentList' 
+ import CommentList from './Comments/CommentList' 
 import React from 'react'
 
 export default function Todo(props){
-  const { title, description, imgUrl, _id, upvote, downvote, votingUp, votingDown } = props
+  const { title, description, imgUrl, _id, upvote, downvote, votingUp, votingDown, handleDelete } = props
   return (
     <div className="todo">
-       <p>{ title }</p>
       <h3>{ description }</h3>
-   
+      <h1>{ title }</h1>
       <img className="imgTodo" src={imgUrl} alt={imgUrl} width={300}/>
+      
       <div><button className="likeButton" onClick={(e) => votingUp(_id)}>Like</button><p>{upvote}</p></div>
       <div><button className="dislikeButton" onClick={(e) => votingDown(_id)}>Dislike</button><p>{downvote}</p></div>
-      {/* <div> <CommentList issueId={_id}/></div> */}
+      <div><button onClick={(e) => handleDelete(_id)}>Delete</button></div>
+      
+      <div> <CommentList issueId={_id}/></div>
     </div>
   )
 }

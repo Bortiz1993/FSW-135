@@ -12,6 +12,7 @@ export default function Profile(){
     }, 
     addTodo, 
     todos,
+    handleDelete,
     votingUp,
     votingDown 
   } = useContext(UserContext)
@@ -20,13 +21,8 @@ export default function Profile(){
     <div className="profile">
       <h3>Add A Todo</h3>
      <TodoForm addTodo={addTodo}/>
-   
-      <h1>Welcome @{username}!</h1> 
-     
-     
-     
-     
-      <TodoList   votingUp={votingUp} votingDown={votingDown} todos={todos}/>
+      <h1>Welcome @{username}!</h1>    
+      <TodoList handleDelete={handleDelete}   votingUp={votingUp} votingDown={votingDown} todos={todos}/>
       <h2>Your Todos</h2>
     </div>
   )

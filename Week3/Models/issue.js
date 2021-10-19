@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const nodemon = require('nodemon')
 const Schema = mongoose.Schema
 
 const issueSchema = new Schema({
@@ -39,6 +40,11 @@ const issueSchema = new Schema({
     type: Number,
     default: 0
 
+  },
+
+  delete:{
+    type: String,
+    default: ""
   }
 })
 

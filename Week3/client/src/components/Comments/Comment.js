@@ -1,13 +1,11 @@
    
-// import React from 'react'
+import React from 'react'
 
-// export default function Todo(props){
-//   const { title, description, imgUrl, _id, upvote, downvote, votingUp, votingDown } = props
-//   return (
-//     <div className="todo">
-//       <h1>{ title }</h1>
-//       <h3>{ description }</h3>
-//       <img src={imgUrl} alt={imgUrl} width={300}/>
-//     </div>
-//   )
-// }
+export default function Comment(props){
+  const { body, _id } = props
+  return (
+    <div className="todo">
+      <h1>{ body}</h1>
+    </div>
+  )
+}

@@ -98,7 +98,7 @@ issueRouter.get('/search', (req, res, next) => {
 
 
 // Delete One
-issueRouter.delete("/:issueId", (req, res, next) => {
+issueRouter.delete("/:issueId/delete", (req, res, next) => {
   Issue.findOneAndDelete(
     {_id: req.params.issueId}, 
     (err, deletedItem) => {

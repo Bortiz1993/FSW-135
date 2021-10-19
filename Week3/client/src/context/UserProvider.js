@@ -20,11 +20,12 @@ export default function UserProvider(props){
     user: JSON.parse(localStorage.getItem("user")) || {}, 
     token: localStorage.getItem("token") || "", 
     todos: [] ,
+    comments: [{_id:"24", body:"25"}],
     errMsg: ' '
   }
 
   const [userState, setUserState] = useState(initState)
-
+  
   // const [cookies, setCookie] = useCookies(['user']);
 
   function handleAuthError(errMsg) {
@@ -109,6 +110,30 @@ export default function UserProvider(props){
       .catch(err => console.dir(err.response.data.errMsg))
   }
 
+  function handleDelete(id) {
+    userAxios.delete(`/api/issue/${id}/delete`)
+    .then(res => {
+      setUserState(prevState => ({
+        ...prevState,
+        todos: ''
+      }))
+    });
+  };
+
+  function getComments(issueId){
+    userAxios.get(`/api/comment/${issueId}`)
+      .then(res => {
+        console.log(res.data)
+        setUserState(prevState => ({
+          ...prevState,
+         comments: res.data
+        }))
+        
+      })
+      .catch(err => console.dir(err.response.data.errMsg))
+    
+  }
+
   function votingUp(id){
     userAxios.put(`/api/issue/${id}/upvote`)
     .then(res => {
@@ -143,7 +168,9 @@ export default function UserProvider(props){
         votingUp,
         votingDown,
         addTodo,
-        resetAuthError
+        handleDelete,
+        resetAuthError,
+        getComments
       }}>
       { props.children }
     </UserContext.Provider>

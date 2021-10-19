@@ -1,11 +1,22 @@
-// import React from 'react'
-// import Comment from './Comment.js'
+import React, { useEffect, useState, useContext } from 'react'
 
-// export default function CommentList(props){
-//   const { todos, votingUp, votingDown } = props
-//   return (
-//     <div className="todo-list">
-//       { todos.map(todo => <Comment {...todo} votingUp={votingUp} votingDown={votingDown} key={todo._id}/>) }
-//     </div>
-//   )
-// }
+import Comment from './Comment.js'
+import { UserContext } from './../../context/UserProvider'
+
+export default function CommentList(props){
+  const { issueId} = props
+  const [commentsArray, setComments] = useState([])
+const {getComments, comments} = useContext(UserContext)
+  // useEffect(() => {
+
+  //   getComments(issueId)
+  //   setComments(comments)
+
+
+  // }, [])
+  return (
+    <div className="comment-list">
+      { commentsArray.map(comment => <Comment {...comment} key={comment._id}/>) }
+    </div>
+  )
+}

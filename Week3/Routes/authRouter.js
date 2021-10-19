@@ -2,8 +2,8 @@ const express = require('express')
 const authRouter = express.Router()
 const User = require('../Models/user.js')
 const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
-const bcrypt = require('bcrypt')
+// const cookieParser = require('cookie-parser')
+// const bcrypt = require('bcrypt')
 
 
 
@@ -27,7 +27,7 @@ authRouter.post("/signup", (req, res, next) => {
                             // payload,            // secret
       const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET)
       res.cookie('token',token,{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true, secure:true, sameSite:true });
-      res.cookie('user',savedUser.withoutPassword(),{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true, secure:true, sameSite:true });
+      res.cookie('user',savedUser.withoutPassword(),{ maxAge:  60 * 60 * 1000, httpOnly: true, secure:true, sameSite:true });
       return res.status(201).send({ token, user: savedUser.withoutPassword() })
     })
   

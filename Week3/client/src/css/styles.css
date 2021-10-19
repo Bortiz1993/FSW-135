@@ -98,6 +98,7 @@
   
   .profile > h3 {
     margin: 16px 0;
+    margin-right: 5px;
     text-decoration: underline;
   }
   
@@ -113,10 +114,10 @@
   
   .profile > form > input,
   .profile > form > button {
-    background-color: darkgreen;
+    background-color: whitesmoke;
     margin: 8px 0;
     padding: 8px;
-    border-radius: 5px
+    border-radius: 5px;
   }
 
   .likeButton{
@@ -128,5 +129,5 @@ background-color: blue;
   }
 
   .imgTodo{
-    border: 8px solid darkslategray;
+    border: 8px solid #137a7a;
   }

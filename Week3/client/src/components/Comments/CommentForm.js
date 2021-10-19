@@ -1,39 +1,37 @@
-// import React, { useState } from 'react'
+import React, { useState } from 'react'
 
-// const initInputs = {
-//   title: "",
-//   description: "",
-//   imgUrl: ""
-// }
+const initInputs = {
+  body: ""
+}
 
-// export default function TodoForm(props){
-//   const [inputs, setInputs] = useState(initInputs)
-//   const { addTodo } = props
+export default function CommentForm(props){
+  const [inputs, setInputs] = useState(initInputs)
+  const { addTodo } = props
 
-//   function handleChange(e){
-//     const {name, value} = e.target
-//     setInputs(prevInputs => ({
-//       ...prevInputs,
-//       [name]: value
-//     }))
-//   }
+  function handleChange(e){
+    const {name, value} = e.target
+    setInputs(prevInputs => ({
+      ...prevInputs,
+      [name]: value
+    }))
+  }
 
-//   function handleSubmit(e){
-//     e.preventDefault()
-//     addTodo(inputs)
-//     setInputs(initInputs)
-//   }
+  function handleSubmit(e){
+    e.preventDefault()
+    addTodo(inputs)
+    setInputs(initInputs)
+  }
 
-//   const { title, description, imgUrl } = inputs
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input 
-//         type="text" 
-//         name="title" 
-//         value={title} 
-//         onChange={handleChange} 
-//         placeholder="Title"/>
-//       <button>Add Todo</button>
-//     </form>
-//   )
-// }
+  const { body } = inputs
+  return (
+    <form onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        name="body" 
+        value={body} 
+        onChange={handleChange} 
+        placeholder="Body"/>
+      <button>Add a Comment</button>
+    </form>
+  )
+}
