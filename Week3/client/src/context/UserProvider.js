@@ -110,15 +110,15 @@ export default function UserProvider(props){
       .catch(err => console.dir(err.response.data.errMsg))
   }
 
-  function handleDelete(id) {
-    userAxios.delete(`/api/issue/${id}/delete`)
-    .then(res => {
-      setUserState(prevState => ({
-        ...prevState,
-        todos: ''
-      }))
-    });
-  };
+  // function handleDelete(id) {
+  //   userAxios.delete(`/api/issue/${id}/delete`)
+  //   .then(res => {
+  //     setUserState(prevState => ({
+  //       ...prevState,
+  //       todos: ''
+  //     }))
+  //   });
+  // };
 
   function getComments(issueId){
     userAxios.get(`/api/comment/${issueId}`)
@@ -168,7 +168,7 @@ export default function UserProvider(props){
         votingUp,
         votingDown,
         addTodo,
-        handleDelete,
+        // handleDelete,
         resetAuthError,
         getComments
       }}>

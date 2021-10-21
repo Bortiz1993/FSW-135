@@ -61,9 +61,9 @@ commentRouter.get("/byId/:commentId", (req, res, next) => {
 
 
 // Get by username
-commentRouter.get("/search/username", (req, res, next) => {
-  const username = req.query.username
-  Comment.find({ username: username}, (err, comment) => {
+commentRouter.get("/search/issue/:issue", (req, res, next) => {
+  const issue = req.params.issue
+  Comment.find({ issueId: issue}, (err, comment) => {
     if(!comment){
         const error = new Error("You must provide a user name")
         res.status(500)

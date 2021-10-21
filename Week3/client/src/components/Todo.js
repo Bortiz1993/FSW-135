@@ -1,9 +1,45 @@
  import CommentList from './Comments/CommentList' 
-import React from 'react'
+import React, {useEffect, useState, useContext} from 'react'
+import { UserContext } from './../context/UserProvider'
+import axios from 'axios'
+
+const userAxios = axios.create()
+
+userAxios.interceptors.request.use(config => {
+   const token = localStorage.getItem("token")
+  // console.log(cookies.get({
+  //   name: "token"
+  // }))
+  config.headers.Authorization = `Bearer ${token}`
+  return config
+})
 
 export default function Todo(props){
   const { title, description, imgUrl, _id, upvote, downvote, votingUp, votingDown, handleDelete } = props
-  return (
+  const [commentsArray, setComments] = useState([])
+// const {getComments, comments} = useContext(UserContext)
+  useEffect(() => {
+
+    getComments(_id)
+    // setComments(comments)
+
+
+  }, [])
+
+  function getComments(issueId){
+    userAxios.get(`/api/comment/search/issue/${issueId}`)
+      .then(res => {
+        console.log(res.data)
+        setComments(prevState => (
+          [...prevState, res.data]
+        ))
+        
+      })
+      .catch(err => console.dir(err.response.data.errMsg))
+    
+  }
+
+return (
     <div className="todo">
       <h3>{ description }</h3>
       <h1>{ title }</h1>
@@ -13,7 +49,7 @@ export default function Todo(props){
       <div><button className="dislikeButton" onClick={(e) => votingDown(_id)}>Dislike</button><p>{downvote}</p></div>
       <div><button onClick={(e) => handleDelete(_id)}>Delete</button></div>
       
-      <div> <CommentList issueId={_id}/></div>
+      <div> <CommentList commentsArray={commentsArray} issueId={_id}/></div>
     </div>
   )
 }

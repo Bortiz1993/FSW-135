@@ -5,9 +5,10 @@ import { UserContext } from './../../context/UserProvider'
 
 export default function CommentList(props){
   const { issueId} = props
-  const [commentsArray, setComments] = useState([])
-const {getComments, comments} = useContext(UserContext)
-  // useEffect(() => {
+  console.log(props)
+  // const [commentsArray, setComments] = useState([])
+// const {getComments, comments} = useContext(UserContext)
+//   // useEffect(() => {
 
   //   getComments(issueId)
   //   setComments(comments)
@@ -16,7 +17,7 @@ const {getComments, comments} = useContext(UserContext)
   // }, [])
   return (
     <div className="comment-list">
-      { commentsArray.map(comment => <Comment {...comment} key={comment._id}/>) }
+      { props.commentsArray.map(comment => <Comment {...comment} key={comment._id}/>) }
     </div>
   )
 }

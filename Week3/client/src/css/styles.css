@@ -7,7 +7,7 @@
     font-family: Georgia;
     outline: none;
     text-decoration: none;
-    color: white;
+    color: black;
   }
   
   html{
@@ -72,11 +72,11 @@
   }
   
   .todo-list {
-  
+  border: 0.5px solid whitesmoke;
   }
   
   .todo {
-  
+  margin: 10px;
   }
   
   .public {
@@ -121,7 +121,7 @@
   }
 
   .likeButton{
-background-color: blue;
+background-color: lightblue;
   }
 
   .dislikeButton{
