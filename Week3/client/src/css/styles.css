@@ -131,3 +131,31 @@ background-color: lightblue;
   .imgTodo{
     border: 8px solid #137a7a;
   }
+
+  @media only screen and (min-width: 360px) and (max-width: 720px){
+
+    .profile {
+      
+      justify-content: space-evenly;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  
+  /*Tablet*/
+  @media only screen and (min-width: 721px) and (max-width: 1024px){
+    .profile{
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+  
+  /*Laptop*/
+  @media only screen and (min-width: 1025px) and (max-width: 1440px){
+   
+    .profile{
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
